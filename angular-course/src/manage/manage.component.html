@@ -1,0 +1,35 @@
+<div ngbDropdown>
+  <button
+    ngbDropdownToggle
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Valg
+  </button>
+  <div
+    ngbDropdownMenu
+    class="dropdown-menu"
+    aria-labelledby="dropdownMenuButton"
+  >
+    <button class="dropdown-item">
+      <i class="bi bi-suit-heart-fill"></i> Legg som favoritt
+    </button>
+    <button class="dropdown-item" (click)="edit = true">
+      <i class="bi bi-pencil-square"></i> Rediger oppskrift
+    </button>
+    <button class="dropdown-item" (click)="deleteRecipe()">
+      <i class="bi bi-trash-fill"></i> Slett oppskrift
+    </button>
+  </div>
+</div>
+
+<meal-form
+  *ngIf="edit"
+  [onUpdateList]="onUpdateList"
+  [mode]="'edit'"
+  [recipie]="recipie"
+></meal-form>

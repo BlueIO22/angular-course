@@ -1,0 +1,21 @@
+<div class="card text-white bg-primary recipie">
+  <img class="card-img-top" src="{{ recipie.imagePath }}" alt="Title" />
+  <div class="card-body">
+    <h4 class="card-title">{{ recipie.name }}</h4>
+    <p class="card-text">
+      {{ recipie.description }}
+    </p>
+    <p class="fw-bold">Ingredienser:</p>
+    <ul class="list-group list-group-flush">
+      <li
+        class="list-group-item bg-primary text-white"
+        *ngFor="let ingredient of recipie.ingredients"
+      >
+        {{ ingredient.amount }}stk {{ ingredient.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="card-footer">
+    <manage [recipie]="recipie" [onUpdateList]="onUpdateList" />
+  </div>
+</div>

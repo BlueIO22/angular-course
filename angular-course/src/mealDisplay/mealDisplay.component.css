@@ -1,0 +1,16 @@
+.recipie {
+  width: 400px;
+  margin-bottom: 10px;
+  animation: flyIn 1s ease-in-out;
+}
+
+@keyframes flyIn {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translatey(0%);
+    opacity: 1;
+  }
+}

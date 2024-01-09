@@ -1,0 +1,7 @@
+.title {
+  font-size: 50px;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 0.5px;
+  font-weight: bold;
+  -webkit-text-fill-color: white;
+}

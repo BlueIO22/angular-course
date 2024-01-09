@@ -1,0 +1,106 @@
+<div class="card text-start">
+  <div class="card-body">
+    <div class="container">
+      <div class="card">
+        <div class="card-title p-3">
+          <p class="h1 text-black">
+            {{
+              mode == "add"
+                ? "Legg til en oppskrift"
+                : "Rediger " + recipie.name
+            }}
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="input-group mb-3" *ngIf="mode == 'add'">
+            <span class="input-group-text">Navn </span
+            ><input type="text" class="form-control" [(ngModel)]="name" />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Beskrivelse </span
+            ><input
+              type="text"
+              class="form-control"
+              [(ngModel)]="description"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Bilde (url) </span
+            ><input type="text" class="form-control" [(ngModel)]="imagePath" />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Ingredienser </span
+            ><input
+              type="text"
+              placeholder="Eksempel: Tomat,3 + enter = Tomat 3stk"
+              class="form-control"
+              [(ngModel)]="ingredient"
+              (keydown)="addIngredient($event)"
+            />
+          </div>
+          <ul class="list-group" *ngFor="let ingredient of ingredients">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center mb-2"
+            >
+              <p class="font-weigth-bold">
+                {{ ingredient.name }}
+                <span class="badge bg-primary rounded-pill"
+                  >{{ ingredient.amount }}stk</span
+                >
+              </p>
+              <button
+                class="align-end btn btn-danger"
+                (click)="removeIngredient(ingredient.name)"
+              >
+                Fjern
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+          <button
+            *ngIf="mode === 'add'"
+            [disabled]="
+              !(
+                this.name.length > 0 &&
+                this.description.length > 0 &&
+                this.imagePath.length > 0 &&
+                this.ingredients.length > 0
+              )
+            "
+            class="btn btn-success btn-lg"
+            (click)="addRecipie()"
+          >
+            Legg til oppskrift
+          </button>
+
+          <button
+            *ngIf="mode === 'edit'"
+            [disabled]="
+              !(
+                this.name.length > 0 &&
+                this.description.length > 0 &&
+                this.imagePath.length > 0 &&
+                this.ingredients.length > 0
+              )
+            "
+            class="btn btn-success btn-lg"
+            (click)="editRecipie()"
+          >
+            Oppdater oppskrift
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-2">
+  <div
+    *ngIf="showAlert"
+    class="alert alert-{{ alertType }} alertAnimation"
+    role="alert"
+  >
+    <span class="fw-bold">{{ alertText }}</span>
+  </div>
+</div>

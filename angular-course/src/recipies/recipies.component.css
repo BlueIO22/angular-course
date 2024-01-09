@@ -1,0 +1,61 @@
+.recipie-adder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 500px;
+  margin: auto;
+  background-color: white;
+  font-weight: bold;
+  border: 1px solid black;
+  font-size: 24px;
+}
+
+.recipie p:first-child {
+  font-size: 50px;
+  padding: 10px;
+  color: white;
+  -webkit-text-stroke: 0.5px black;
+  -webkit-text-fill-color: white;
+  font-weight: bold;
+}
+
+.recipie-adder >>> input {
+  font-size: 25px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.recipie-adder >>> button {
+  width: 100%;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.recipie-adder >>> button:hover {
+  background-color: black;
+  color: white;
+  transition: 0.5 ease-in-out;
+  cursor: pointer;
+}
+
+.alertAnimation {
+  animation: alert 0.5s ease-in-out;
+}
+
+.searchInput {
+  margin-bottom: 50px;
+}
+
+@keyframes alert {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

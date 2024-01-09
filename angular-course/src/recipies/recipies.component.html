@@ -1,0 +1,27 @@
+<div class="recipie">
+  <div class="container">
+    <p>Oppskrifter</p>
+    <div class="row">
+      <div class="input-group searchInput">
+        <span class="input-group-text" id="basic-addon1"
+          ><i class="bi bi-search-heart"></i
+        ></span>
+        <input
+          type="text"
+          placeholder="Søk på oppskrift, beskrivelse eller ingredienser"
+          class="form-control"
+          [(ngModel)]="search"
+          (keyup)="searchRecipie($event)"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let recipie of recipies">
+        <meal-display
+          [recipie]="recipie"
+          [onUpdateList]="onUpdateList"
+        ></meal-display>
+      </div>
+    </div>
+  </div>
+</div>
