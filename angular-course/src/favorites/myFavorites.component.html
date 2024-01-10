@@ -1,7 +1,7 @@
-<div class="p-5 bg-primary text-white">
+<div class="p-5 bg-primary text-white intro">
   <h1 style="font-size: 50px">Hei, du!</h1>
   <p style="font-size: 24px">
-    Her er dine favoritter <i class="bi-heart-fill"></i>
+    Her er dine favoritter <i class="pulsating bi-heart-fill"></i>
   </p>
 </div>
 
@@ -11,7 +11,7 @@
       Du har ingen favoritter, du kan legge dem til
       <a style="text-decoration: none; cursor: pointer" href="/recipies">her</a>
     </p>
-    <div class="col-sm-4" *ngFor="let recipie of favorites">
+    <div class="col-sm-4 recipie" *ngFor="let recipie of favorites">
       <meal-display
         [recipie]="recipie"
         [onUpdateList]="onUpdateList"

@@ -2,12 +2,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Ingredient, Recipe } from '../app/app.component';
+import { RecipiePreview } from './recipiePreview/recipiePreview.component';
+import AngularFireDatabase from '@angular/fire/database';
 
 @Component({
   templateUrl: './mealForm.component.html',
   styleUrl: './mealForm.component.css',
-  imports: [CommonModule, FormsModule],
-  standalone: true,
   selector: 'meal-form',
 })
 export class MealForm {
@@ -15,6 +15,8 @@ export class MealForm {
   @Input() recipie: Recipe;
   @Input() onUpdateList: () => void;
   @Input() onEditCancel: () => void;
+
+  constructor() {}
 
   name: string = '';
   description: string = '';
@@ -67,6 +69,8 @@ export class MealForm {
     this.ingredients = this.ingredients.filter((x) => x.name !== name);
   };
 
+  createRecipie = (recipie: Recipe) => {};
+
   editRecipie = () => {
     const recipie = {
       name: this.name,
@@ -99,6 +103,8 @@ export class MealForm {
     }
     recipies.push(recipie);
     localStorage.setItem('recipies', JSON.stringify(recipies));
+
+    this.createRecipie(recipie);
     this.clearForm();
     this.createAlert('Oppskrift lagd til!', 'success');
     this.onUpdateList();

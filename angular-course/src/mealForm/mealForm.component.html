@@ -1,127 +1,146 @@
-<div
-  class="card text-start {{ mode == 'edit' && 'p-0' }}"
-  [style]="mode === 'edit' && 'width: 400px'"
->
-  <div class="card-body {{ mode == 'edit' && 'p-0' }}">
-    <div class="container {{ mode == 'edit' && 'p-0' }}">
-      <div class="card">
-        <div
-          class="card-title p-3"
-          style="display: flex; justify-content: space-between"
-        >
-          <p class="h1 text-black">
-            {{
-              mode == "add"
-                ? "Legg til en oppskrift"
-                : "Rediger " + recipie.name
-            }}
-          </p>
-          <button
-            *ngIf="mode == 'edit'"
-            class="btn align-end"
-            (click)="onEditCancel()"
+<div class="{{ mode === 'add' ? 'addMode container' : '' }}">
+  <div
+    class="card text-start wrapper {{ mode == 'edit' ? 'p-0' : '' }}"
+    [style]="mode === 'edit' && 'width: 400px'"
+  >
+    <div class="card-body {{ mode == 'edit' ? 'p-0' : '' }}">
+      <div
+        *ngIf="showAlert"
+        class="alert alert-{{ alertType }} alertAnimation"
+        role="alert"
+      >
+        <span class="fw-bold">{{ alertText }}</span>
+      </div>
+      <div class="container {{ mode == 'edit' && 'p-0' }}">
+        <div class="card">
+          <div
+            class="card-title p-3"
+            style="display: flex; justify-content: space-between"
           >
-            <i class="bi bi-x-circle-fill"></i>
-          </button>
-        </div>
-        <div class="card-body">
-          <div class="input-group mb-3" *ngIf="mode == 'add'">
-            <span class="input-group-text">Navn </span
-            ><input type="text" class="form-control" [(ngModel)]="name" />
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Beskrivelse </span
-            ><textarea
-              class="form-control textarea"
-              maxlength="150"
-              [(ngModel)]="description"
-            ></textarea>
-            <span style="width: 100%"
-              >Antall karakterer {{ description.length }} av 150.
-              <span *ngIf="description.length < 100" class="text-danger fw-bold"
-                >Det må være minst 200 karakterer!</span
-              >
-            </span>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Bilde (url) </span
-            ><input type="text" class="form-control" [(ngModel)]="imagePath" />
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Ingredienser </span
-            ><input
-              type="text"
-              placeholder="Eksempel: Tomat,3 + enter = Tomat 3stk"
-              class="form-control"
-              [(ngModel)]="ingredient"
-              (keydown)="addIngredient($event)"
-            />
-          </div>
-          <ul class="list-group" style="max-height: 60px; overflow-y: auto">
-            <li
-              *ngFor="let ingredient of ingredients"
-              class="list-group-item d-flex justify-content-between align-items-center mb-2"
+            <p class="h1 text-black">
+              {{
+                mode == "add"
+                  ? "Legg til en oppskrift"
+                  : "Rediger " + recipie.name
+              }}
+            </p>
+            <button
+              *ngIf="mode == 'edit'"
+              class="btn align-end"
+              (click)="onEditCancel()"
             >
-              <p class="font-weigth-bold">
-                {{ ingredient.name }}
-                <span class="badge bg-primary rounded-pill"
-                  >{{ ingredient.amount }}stk</span
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3" *ngIf="mode == 'add'">
+              <span class="input-group-text">Navn </span
+              ><input type="text" class="form-control" [(ngModel)]="name" />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Beskrivelse </span
+              ><textarea
+                class="form-control textarea"
+                maxlength="150"
+                [(ngModel)]="description"
+              ></textarea>
+              <span style="width: 100%"
+                >Antall karakterer {{ description.length }} av 150.
+                <span
+                  *ngIf="description.length < 100"
+                  class="text-danger fw-bold"
+                  >Det må være minst 200 karakterer!</span
                 >
-              </p>
-              <button
-                class="align-end btn btn-danger"
+              </span>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Bilde (url) </span
+              ><input
+                type="text"
+                class="form-control"
+                [(ngModel)]="imagePath"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Ingredienser </span
+              ><input
+                type="text"
+                placeholder="Eksempel: Tomat,3 + enter = Tomat 3stk"
+                class="form-control"
+                [(ngModel)]="ingredient"
+                (keydown)="addIngredient($event)"
+              />
+            </div>
+            <span
+              *ngFor="let ingredient of ingredients"
+              class="badge badge-pill bg-primary ingredientBadge"
+            >
+              {{ ingredient.name }}
+              <a
+                class="align-end text-white"
+                style="cursor: pointer"
                 (click)="removeIngredient(ingredient.name)"
               >
-                Fjern
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer d-flex justify-content-center">
-          <button
-            *ngIf="mode === 'add'"
-            [disabled]="
-              !(
-                this.name.length > 0 &&
-                this.description.length > 0 &&
-                this.description.length >= 100 &&
-                this.imagePath.length > 0 &&
-                this.ingredients.length > 0
-              )
-            "
-            class="btn btn-success btn-lg"
-            (click)="addRecipie()"
-          >
-            Legg til oppskrift
-          </button>
+                <i class="bi bi-x-circle-fill" style="font-size: 14px"></i>
+              </a>
+            </span>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <button
+              *ngIf="mode === 'add'"
+              [disabled]="
+                !(
+                  this.name.length > 0 &&
+                  this.description.length > 0 &&
+                  this.description.length >= 100 &&
+                  this.imagePath.length > 0 &&
+                  this.ingredients.length > 0
+                )
+              "
+              class="btn btn-success btn-lg"
+              (click)="addRecipie()"
+            >
+              <i class="bi bi-plus-circle"></i> Legg til oppskrift
+            </button>
 
-          <button
-            *ngIf="mode === 'edit'"
-            [disabled]="
-              !(
-                this.name.length > 0 &&
-                this.description.length > 0 &&
-                this.imagePath.length > 0 &&
-                this.ingredients.length > 0
-              )
-            "
-            class="btn btn-success btn-lg"
-            (click)="editRecipie()"
-          >
-            Oppdater oppskrift
-          </button>
+            <button
+              *ngIf="mode === 'edit'"
+              [disabled]="
+                !(
+                  this.name.length > 0 &&
+                  this.description.length > 0 &&
+                  this.imagePath.length > 0 &&
+                  this.ingredients.length > 0
+                )
+              "
+              class="btn btn-success btn-lg"
+              (click)="editRecipie()"
+            >
+              <i class="bi bi-pencil-square"></i> Oppdater oppskrift
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="container mt-2">
-  <div
-    *ngIf="showAlert"
-    class="alert alert-{{ alertType }} alertAnimation"
-    role="alert"
-  >
-    <span class="fw-bold">{{ alertText }}</span>
+  <div class="previewContainer" *ngIf="mode == 'add'">
+    <div
+      style="
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      "
+    >
+      <recipie-preview
+        [recipie]="{
+          name: name,
+          description: description,
+          imagePath: imagePath,
+          ingredients: ingredients
+        }"
+      ></recipie-preview>
+    </div>
   </div>
 </div>

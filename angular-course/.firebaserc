@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "oppskrifter-65850": {
+      "hosting": {
+        "angular-course": [
+          "oppskrifter-65850"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "oppskrifter-65850"
+  }
+}

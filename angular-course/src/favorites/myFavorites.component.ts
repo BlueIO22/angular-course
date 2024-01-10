@@ -7,8 +7,6 @@ import { MealDisplay } from '../mealDisplay/mealDisplay.component';
   templateUrl: './myFavorites.component.html',
   styleUrls: ['./myFavorites.component.css'],
   selector: 'my-favorites',
-  imports: [CommonModule, MealDisplay],
-  standalone: true,
 })
 export class MyFavoritesComponent implements OnInit {
   favorites: Recipe[] = [];

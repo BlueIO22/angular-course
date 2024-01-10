@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, importProvidersFrom } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { MealForm } from '../mealForm/mealForm.component';
-import { MealDisplay } from '../mealDisplay/mealDisplay.component';
 import { MainNavbar } from '../navbarMain/navbarMain.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipiesComponent } from '../recipies/recipies.component';
 import { MyFavoritesComponent } from '../favorites/myFavorites.component';
 import { HomeComponent } from '../home/home.component';
+import { SharedModule } from '../shared/shared.module';
+import { MealFormModule } from '../mealForm/mealForm.module';
+import { RecipiesModule } from '../recipies/recipies.module';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
 
 const appRoutes: Routes = [
   {
@@ -32,8 +34,12 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, MainNavbar],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
+  imports: [
+    SharedModule,
+    RouterModule.forRoot(appRoutes),
+    MealFormModule,
+    RecipiesModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

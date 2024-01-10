@@ -5,3 +5,43 @@
   font-weight: bold;
   -webkit-text-fill-color: white;
 }
+
+.addMode {
+  display: flex;
+  gap: 5%;
+  width: 100vw;
+}
+
+.addMode .wrapper {
+  width: 100% !important;
+  border: 0px;
+  margin-top: 5%;
+}
+
+.addMode >>> .card-body {
+  width: 100%;
+}
+
+.previewContainer {
+  margin-top: 5%;
+  margin-right: 0px;
+}
+
+.ingredientBadge {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: 16px;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

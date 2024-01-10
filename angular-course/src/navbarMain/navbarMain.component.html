@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-sm sticky-top navbar-light bg-light" ngNavbar>
   <div class="container fluid">
-    <a class="navbar-brand" href="/">Marius kokebok</a>
+    <a class="navbar-brand {{ active == '/' && 'fw-bold' }}" href="/"
+      >Marius kokebok</a
+    >
     <button
       class="navbar-toggler d-lg-none"
       type="button"
@@ -15,21 +17,45 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="/recipies" aria-current="page"
-            ><i class="bi bi-list-check"></i> Alle oppskrifter
-            <span class="visually-hidden">(current)</span></a
+          <a
+            class="nav-link {{ active == '/recipies' ? 'fw-bold active' : '' }}"
+            href="/recipies"
+            (click)="active = '/recipies'"
+            aria-current="page"
+            ><i
+              class="bi bi-list-check {{ active == '/recipies' && 'fw-bold' }}"
+            ></i>
+            Alle oppskrifter <span class="visually-hidden">(current)</span></a
           >
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/recipies/add"
-            ><i class="bi bi-plus-circle"></i> Legg til oppskrift</a
+          <a
+            class="nav-link {{
+              active == '/recipies/add' ? 'fw-bold active' : ''
+            }}"
+            (click)="active = '/recipies/add'"
+            href="/recipies/add"
+            ><i
+              class="bi bi-plus-circle {{
+                active == '/recipies/add' && 'fw-bold'
+              }}"
+            ></i>
+            Legg til oppskrift</a
           >
         </li>
       </ul>
       <div class="d-flex my-2 my-lg-0">
-        <a class="nav-link" href="/favorites"
-          ><i class="bi bi-bag-heart-fill"></i> Mine oppskrifter</a
+        <a
+          class="nav-link  {{ active == '/favorites' ? 'fw-bold active' : '' }}"
+          (click)="active = '/favorites'"
+          href="/favorites"
+          ><i
+            class="bi bi-bag-heart-fill {{
+              active == '/favorites' && 'fw-bold'
+            }}"
+          ></i>
+          Mine oppskrifter</a
         >
       </div>
     </div>

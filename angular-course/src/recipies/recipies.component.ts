@@ -1,20 +1,28 @@
 import { FormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../app/app.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { MealDisplay } from '../mealDisplay/mealDisplay.component';
+import { initialRecipieList } from '../demo/data';
 
 @Component({
   templateUrl: './recipies.component.html',
   styleUrls: ['./recipies.component.css'],
-  imports: [FormsModule, CommonModule, MealDisplay],
   selector: 'recipies',
-  standalone: true,
 })
-export class RecipiesComponent {
+export class RecipiesComponent implements OnInit {
   recipies: Recipe[] = JSON.parse(localStorage.getItem('recipies')) ?? [];
   search: '';
+
+  ngOnInit(): void {
+    if (
+      localStorage.getItem('recipies') === null ||
+      localStorage.getItem('recipies') === undefined ||
+      JSON.parse(localStorage.getItem('recipies')).length === 0
+    ) {
+      localStorage.setItem('recipies', JSON.stringify(initialRecipieList));
+    }
+  }
 
   onUpdateList = () => {
     this.recipies = JSON.parse(localStorage.getItem('recipies')) ?? [];
@@ -31,7 +39,7 @@ export class RecipiesComponent {
 
     this.recipies = items.filter(
       (x) =>
-        x.name.toLowerCase().startsWith(search.toLowerCase()) ||
+        x.name.toLowerCase().includes(search.toLowerCase()) ||
         x.description.toLowerCase().includes(search.toLowerCase()) ||
         x.ingredients.some((y) =>
           y.name.toLowerCase().startsWith(search.toLowerCase())

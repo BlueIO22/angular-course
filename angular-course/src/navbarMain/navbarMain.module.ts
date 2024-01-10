@@ -9,4 +9,4 @@ import { MainNavbar } from './navbarMain.component';
   providers: [],
   bootstrap: [MainNavbar],
 })
-export class AppModule {}
+export class MainNavbarModule {}

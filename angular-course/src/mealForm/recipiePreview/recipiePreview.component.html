@@ -1,0 +1,66 @@
+<div *ngIf="recipie" class="card text-white bg-primary recipie">
+  <div class="card-header text-white p-0 overlay">
+    <div [style]="'position: absolute; top: 2.5%; z-index: 100; right: 5%;'">
+      <div ngbDropdown *ngIf="!edit">
+        <button
+          ngbDropdownToggle
+          class="btn btn-secondary"
+          type="button"
+          style="color: white"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+        <div
+          ngbDropdownMenu
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <button class="dropdown-item">
+            <i class="bi bi-pencil-square"></i> Rediger oppskrift
+          </button>
+          <button class="dropdown-item">
+            <i class="bi bi-trash-fill"></i> Slett oppskrift
+          </button>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute; top: 2.5%; left: 5%; z-index: 100">
+      <button class="dropdown-item">
+        <i class="bi bi-suit-heart-fill" style="font-size: 24px"></i>
+      </button>
+    </div>
+    <img
+      class="img-fluid card-img-top"
+      [src]="recipie.imagePath"
+      (error)="
+        recipie.imagePath =
+          'https://www.eatright.org/-/media/images/eatright-landing-pages/foodgroupslp_804x482.jpg?as=0&w=967&rev=d0d1ce321d944bbe82024fff81c938e7&hash=E6474C8EFC5BE5F0DA9C32D4A797D10D'
+      "
+      style="height: 300px; object-fit: cover"
+      alt="Title"
+    />
+  </div>
+
+  <div class="card-body" style="height: 300px; max-height: 300px">
+    <h4 class="card-title">{{ recipie.name }}</h4>
+    <p class="card-text">
+      {{ recipie.description }}
+    </p>
+    <p class="fw-bold">Ingredienser:</p>
+    <ul
+      class="list-group list-group-flush"
+      style="height: 25%; overflow-y: auto"
+    >
+      <li
+        class="list-group-item bg-primary text-white"
+        *ngFor="let ingredient of recipie.ingredients"
+      >
+        {{ ingredient.amount }}stk {{ ingredient.name }}
+      </li>
+    </ul>
+  </div>
+</div>

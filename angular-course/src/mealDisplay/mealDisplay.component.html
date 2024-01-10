@@ -5,16 +5,11 @@
         'position: absolute; top: 2.5%; z-index: 100; right: ' +
         (edit ? '0%;' : '5%;')
       "
+    ></div>
+    <div
+      *ngIf="!edit"
+      style="position: absolute; top: 2.5%; left: 5%; z-index: 100"
     >
-      <manage
-        [onEdit]="onEdit"
-        [recipie]="recipie"
-        [onUpdateList]="onUpdateList"
-        [onEditCancel]="onEditCancel"
-        [favorite]="favorite"
-      />
-    </div>
-    <div style="position: absolute; top: 2.5%; left: 5%; z-index: 100">
       <button class="dropdown-item" (click)="onFavorite()">
         <i
           class="bi {{ favorite ? 'bi-suit-heart-fill' : 'bi-suit-heart' }}"

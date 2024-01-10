@@ -1,14 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../app/app.component';
-import { ManageComponent } from '../manage/manage.component';
 
 @Component({
   templateUrl: './mealDisplay.component.html',
   styleUrl: './mealDisplay.component.css',
-  imports: [CommonModule, ManageComponent],
   selector: 'meal-display',
-  standalone: true,
 })
 export class MealDisplay implements OnInit {
   @Input() recipie: Recipe;
