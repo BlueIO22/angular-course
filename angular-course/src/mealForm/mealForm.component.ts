@@ -14,6 +14,7 @@ export class MealForm {
   @Input() mode: string = 'add';
   @Input() recipie: Recipe;
   @Input() onUpdateList: () => void;
+  @Input() onEditCancel: () => void;
 
   name: string = '';
   description: string = '';

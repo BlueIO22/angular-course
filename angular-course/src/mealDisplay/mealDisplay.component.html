@@ -1,12 +1,46 @@
-<div class="card text-white bg-primary recipie">
-  <img class="card-img-top" src="{{ recipie.imagePath }}" alt="Title" />
-  <div class="card-body">
+<div class="card text-white {{ !edit ? 'bg-primary' : '' }} recipie">
+  <div class="card-header text-white p-0 overlay">
+    <div
+      [style]="
+        'position: absolute; top: 2.5%; z-index: 100; right: ' +
+        (edit ? '0%;' : '5%;')
+      "
+    >
+      <manage
+        [onEdit]="onEdit"
+        [recipie]="recipie"
+        [onUpdateList]="onUpdateList"
+        [onEditCancel]="onEditCancel"
+        [favorite]="favorite"
+      />
+    </div>
+    <div style="position: absolute; top: 2.5%; left: 5%; z-index: 100">
+      <button class="dropdown-item" (click)="onFavorite()">
+        <i
+          class="bi {{ favorite ? 'bi-suit-heart-fill' : 'bi-suit-heart' }}"
+          style="font-size: 24px"
+        ></i>
+      </button>
+    </div>
+    <img
+      *ngIf="!edit"
+      class="img-fluid card-img-top"
+      src="{{ recipie.imagePath }}"
+      style="height: 300px; object-fit: cover"
+      alt="Title"
+    />
+  </div>
+
+  <div *ngIf="!edit" class="card-body" style="height: 300px; max-height: 300px">
     <h4 class="card-title">{{ recipie.name }}</h4>
     <p class="card-text">
       {{ recipie.description }}
     </p>
     <p class="fw-bold">Ingredienser:</p>
-    <ul class="list-group list-group-flush">
+    <ul
+      class="list-group list-group-flush"
+      style="height: 25%; overflow-y: auto"
+    >
       <li
         class="list-group-item bg-primary text-white"
         *ngFor="let ingredient of recipie.ingredients"
@@ -14,8 +48,5 @@
         {{ ingredient.amount }}stk {{ ingredient.name }}
       </li>
     </ul>
-  </div>
-  <div class="card-footer">
-    <manage [recipie]="recipie" [onUpdateList]="onUpdateList" />
   </div>
 </div>

@@ -1,0 +1,21 @@
+<div class="p-5 bg-primary text-white">
+  <h1 style="font-size: 50px">Hei, du!</h1>
+  <p style="font-size: 24px">
+    Her er dine favoritter <i class="bi-heart-fill"></i>
+  </p>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <p style="font-size: 24px" *ngIf="favorites.length === 0">
+      Du har ingen favoritter, du kan legge dem til
+      <a style="text-decoration: none; cursor: pointer" href="/recipies">her</a>
+    </p>
+    <div class="col-sm-4" *ngFor="let recipie of favorites">
+      <meal-display
+        [recipie]="recipie"
+        [onUpdateList]="onUpdateList"
+      ></meal-display>
+    </div>
+  </div>
+</div>
